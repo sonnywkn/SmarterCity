@@ -1,0 +1,65 @@
+<h1 id="tableLabel">Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!clients"><em>Loading...</em></p>
+
+<!--have an ngForm that submits a client to the server side-->
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="clients">
+  <thead>
+    <tr>
+      <th>Client Names</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let client of clients">
+      <td (click)="onClientClick(client)">{{ client.firstName }} {{ client.lastName }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" validate>
+  <table>
+    <tbody>
+      <tr>
+        <td>First Name</td>
+        <td>
+          <input name="firstName" ngModel required #first="ngModel">
+        </td>
+      </tr>
+      <tr>
+        <td>Last Name</td>
+        <td>
+          <input name="lastName" ngModel required>
+        </td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>
+          <input name="email" ngModel required>
+        </td>
+      </tr>
+      <tr>
+        <td>Mobile Number</td>
+        <td>
+          <input name="mobileNumber" ngModel required>
+        </td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>
+          <input name="address" type="text" ngModel required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button>Submit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+<div>
+  <client-detail [client]="selectedClient" *ngIf="selectedClient"></client-detail>
+</div>
